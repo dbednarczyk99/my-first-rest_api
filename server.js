@@ -12,9 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors());
-app.use('/', testimonialsRoutes);
-app.use('/', concertRoutes);
-app.use('/', seatsRoutes);
+app.use('/api', testimonialsRoutes);
+app.use('/api', concertRoutes);
+app.use('/api', seatsRoutes);
 
 
 app.listen(8000, () => {
