@@ -11,6 +11,12 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
   
   useEffect(() => {
     dispatch(loadSeatsRequest());
+
+    const interval = setInterval(() => {
+      dispatch(loadSeatsRequest());
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, [dispatch])
 
   const isTaken = (seatId) => {
