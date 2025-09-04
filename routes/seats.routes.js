@@ -24,8 +24,14 @@ router.route('/seats').post((req, res) => {
     return res.status(400).json({ message: 'All the fields are required!' });
   };
   const newItem = { id: uuidv4(), day, seat, client, email };
-  seats.push(newItem);
-  res.json({ message: 'OK' });
+  const availability = seats.some(item => item.seat === seat && item.day === day);
+  if (availability) {
+    res.status(409).json({ message: 'The slot is already taken...' });
+  }
+  else if (!availability){
+    seats.push(newItem);
+    res.json({ message: 'OK' });
+  }
 });
 
 // modify seat
