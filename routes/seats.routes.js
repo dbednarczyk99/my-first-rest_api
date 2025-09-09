@@ -31,6 +31,7 @@ router.route('/seats').post((req, res) => {
   else if (!availability){
     seats.push(newItem);
     res.json({ message: 'OK' });
+    req.io.emit('seatsUpdated', seats);
   }
 });
 

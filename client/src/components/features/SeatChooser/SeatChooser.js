@@ -1,23 +1,44 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Progress, Alert } from 'reactstrap';
-import { getSeats, loadSeatsRequest, getRequests } from '../../../redux/seatsRedux';
+import { getSeats, loadSeats, loadSeatsRequest, getRequests } from '../../../redux/seatsRedux';
 import './SeatChooser.scss';
+import io from 'socket.io-client';
 
 const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
+  const [socket, setSocket] = useState();
   const dispatch = useDispatch();
   const seats = useSelector(getSeats);
   const requests = useSelector(getRequests);
   
+  // useEffect(() => {
+  //   dispatch(loadSeatsRequest());
+
+  //   const interval = setInterval(() => {
+  //     dispatch(loadSeatsRequest());
+  //   }, 60000);
+
+  //   return () => clearInterval(interval);
+  // }, [dispatch])
+
   useEffect(() => {
     dispatch(loadSeatsRequest());
 
-    const interval = setInterval(() => {
-      dispatch(loadSeatsRequest());
-    }, 60000);
+    const socket = io(process.env.NODE_ENV === 'production' ? '' : 'ws://localhost:8000', { transports: ['websocket'] });
+    setSocket(socket);
 
-    return () => clearInterval(interval);
-  }, [dispatch])
+    socket.on('connect', () => {
+      console.log('Connected to server with id:', socket.id);
+    });
+
+    socket.on('seatsUpdated', (seats) => {
+      dispatch(loadSeats(seats));
+    })
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const isTaken = (seatId) => {
     return (seats.some(item => (item.seat === seatId && item.day === chosenDay)));
