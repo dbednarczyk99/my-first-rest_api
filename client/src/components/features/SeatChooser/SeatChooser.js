@@ -6,7 +6,7 @@ import './SeatChooser.scss';
 import io from 'socket.io-client';
 
 const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
-  const [socket, setSocket] = useState();
+  const [socket, setSocket] = useState(null);
   const dispatch = useDispatch();
   const seats = useSelector(getSeats);
   const requests = useSelector(getRequests);
@@ -22,8 +22,6 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
   // }, [dispatch])
 
   useEffect(() => {
-    dispatch(loadSeatsRequest());
-
     const socket = io(process.env.NODE_ENV === 'production' ? '' : 'ws://localhost:8000', { transports: ['websocket'] });
     setSocket(socket);
 
@@ -38,7 +36,7 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [dispatch]);
 
   const isTaken = (seatId) => {
     return (seats.some(item => (item.seat === seatId && item.day === chosenDay)));
