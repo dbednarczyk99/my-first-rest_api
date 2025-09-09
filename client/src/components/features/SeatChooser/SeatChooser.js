@@ -11,17 +11,9 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
   const seats = useSelector(getSeats);
   const requests = useSelector(getRequests);
   
-  // useEffect(() => {
-  //   dispatch(loadSeatsRequest());
-
-  //   const interval = setInterval(() => {
-  //     dispatch(loadSeatsRequest());
-  //   }, 60000);
-
-  //   return () => clearInterval(interval);
-  // }, [dispatch])
-
   useEffect(() => {
+    dispatch(loadSeatsRequest());
+
     const socket = io(process.env.NODE_ENV === 'production' ? '' : 'ws://localhost:8000', { transports: ['websocket'] });
     setSocket(socket);
 
