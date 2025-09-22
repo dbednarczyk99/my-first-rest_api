@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "68d01b923fb4f001b910e238"
+  },
+  "author": "John Doe",
+  "text": "This company is worth every coin!"
+},
+{
+  "_id": {
+    "$oid": "68d01b923fb4f001b910e239"
+  },
+  "author": "Amanda Doe",
+  "text": "They really know how to make you happy."
+}]

@@ -1,8 +1,0 @@
-[
-    { "day": 1, "seat": 3, "client": "1" },
-    { "day": 1, "seat": 9, "client": "2" },
-    { "day": 1, "seat": 10, "client": "3" },
-    { "day": 1, "seat": 26, "client": "4" },
-    { "day": 2, "seat": 1, "client": "3" },
-    { "day": 2, "seat": 2, "client": "5" }
-  ]

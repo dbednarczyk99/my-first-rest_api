@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "68d02bb23fb4f001b910e24d"
+  },
+  "day": 1,
+  "seat": 3,
+  "client": "68d02bc23fb4f001b910e256"
+},
+{
+  "_id": {
+    "$oid": "68d02bb23fb4f001b910e24e"
+  },
+  "day": 1,
+  "seat": 9,
+  "client": "68d02bc23fb4f001b910e257"
+},
+{
+  "_id": {
+    "$oid": "68d02bb23fb4f001b910e24f"
+  },
+  "day": 1,
+  "seat": 10,
+  "client": "68d02bc23fb4f001b910e258"
+},
+{
+  "_id": {
+    "$oid": "68d02bb23fb4f001b910e250"
+  },
+  "day": 1,
+  "seat": 26,
+  "client": "68d02bc23fb4f001b910e259"
+},
+{
+  "_id": {
+    "$oid": "68d02bb23fb4f001b910e251"
+  },
+  "day": 2,
+  "seat": 1,
+  "client": "68d02bc23fb4f001b910e256"
+},
+{
+  "_id": {
+    "$oid": "68d02bb23fb4f001b910e252"
+  },
+  "day": 2,
+  "seat": 2,
+  "client": "68d02bc23fb4f001b910e25a"
+},
+{
+  "_id": {
+    "$oid": "68d0fffb576e63a440cbc148"
+  },
+  "day": 1,
+  "seat": 1,
+  "client": "68d0fffb576e63a440cbc146"
+},
+{
+  "_id": {
+    "$oid": "68d101bc5a3387e926907c8c"
+  },
+  "day": 1,
+  "seat": 40,
+  "client": "68d101bc5a3387e926907c8a"
+},
+{
+  "_id": {
+    "$oid": "68d127a0166e726086962e03"
+  },
+  "day": 1,
+  "seat": 40,
+  "client": "68d127a0166e726086962e01"
+},
+{
+  "_id": {
+    "$oid": "68d12997c67ed42138174e99"
+  },
+  "day": 2,
+  "seat": 34,
+  "client": "68d12997c67ed42138174e97"
+},
+{
+  "_id": {
+    "$oid": "68d129d5c67ed42138174ea3"
+  },
+  "day": 2,
+  "seat": 33,
+  "client": "68d129d5c67ed42138174ea1"
+}]
