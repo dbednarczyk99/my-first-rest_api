@@ -1,16 +1,19 @@
+// server.js
+
 const express = require('express');
 const cors = require('cors');
 const socket = require('socket.io');
 const path = require('path');
-const { v4: uuidv4 } = require('uuid');
-const db = require('./db');
+const mongoose = require('mongoose');
+
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
 const app = express();
-const server = app.listen(process.env.PORT || 8000, () => {
-  console.log('Server is running');
+const PORT = process.env.PORT || 8000;
+const server = app.listen(PORT, () => { 
+  console.log(`Server is running on port ${PORT}`);
 });
 const io = socket(server);
 io.on('connection', (socket) => {
@@ -36,3 +39,12 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
   res.status(404).send('404 not found...');
 });
+
+// connects our backend code with the database
+mongoose.connect('mongodb://0.0.0.0:27017/NewWaveDB');
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log('Connected to the database');
+});
+db.on('error', err => console.log('Error ' + err));

@@ -1,62 +1,24 @@
 // testimonials.routes.js
-const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 const router = express.Router();
-const db = require('./../db');
-const testimonials = db.testimonials;
+const TestimonialsMethods = require('../methods/testimonials.methods');
 
 // get all testimonials
-router.route('/testimonials').get((req, res) => {
-  res.json(testimonials);
-});
+router.get('/testimonials', TestimonialsMethods.getAll);
 
 // get random testimonial from existing array
-router.route('/testimonials/random').get((req, res) => {
-  const randomIndex = Math.floor(Math.random() * testimonials.length);
-  const item = testimonials[randomIndex];
-  res.json(item);
-});
+router.get('/testimonials/random', TestimonialsMethods.getRandom);
 
 // get testimonial with id
-router.route('/testimonials/:id').get((req, res) => {
-  const item = testimonials.find(i => i.id === req.params.id);
-  if (item) res.json(item);
-  else res.status(404).send('404 not found...');
-});
+router.get('/testimonials/:id', TestimonialsMethods.getById);
 
 // add new testimonial
-router.route('/testimonials').post((req, res) => {
-  const { author, text } = req.body;
-  if (!author || !text) {
-    return res.status(400).json({ message: 'All the fields are required!' });
-  };
-  const newItem = { id: uuidv4(), author, text };
-  testimonials.push(newItem);
-  res.json({ message: 'OK' });
-});
+router.post('/testimonials', TestimonialsMethods.post);
 
 // modify testimonial
-router.route('/testimonials/:id').put((req, res) => {
-  const { author, text } = req.body;
-  const item = testimonials.find(i => i.id === req.params.id);
-  if (item) {
-    if (!author && !text) {
-      return res.status(400).json({ message: 'At least one value must be modified!' });
-    };
-    if (author) item.author = author;
-    if (text) item.text = text;
-    res.json({ message: 'OK' });
-  } else res.status(404).send('404 not found...');
-});
+router.put('/testimonials/:id', TestimonialsMethods.modify);
 
 // delete testimonial
-router.route('/testimonials/:id').delete((req, res) => {
-  const item = testimonials.find(i => i.id === req.params.id);
-  const index = testimonials.indexOf(item);
-  if (index >= 0) {
-    testimonials.splice(index, 1);
-    res.json({ message: 'OK' });
-  } else res.status(404).send('404 not found...');
-});
+router.delete('/testimonials/:id', TestimonialsMethods.delete);
 
 module.exports = router;
